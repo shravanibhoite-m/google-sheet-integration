@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sheet Integration</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+  </head>
+  <body>
+    <header class="header">
+      <h1>Sheet Integration</h1>
+      <button id="sign-in-button" type="button" class="primary">
+        Sign in with Google
+      </button>
+    </header>
+
+    <p id="status" class="status">Loading…</p>
+
+    <div id="workspace" class="layout" hidden>
+      <aside class="card sidebar">
+        <h2>Your sheets</h2>
+        <form id="add-sheet-form" class="add-sheet">
+          <input
+            id="sheet-url-input"
+            type="text"
+            placeholder="Paste a Google Sheets link"
+            aria-label="Google Sheets link"
+          />
+          <button type="submit" class="primary">Add</button>
+        </form>
+        <ul id="sheet-list" class="sheet-list"></ul>
+        <p id="no-sheets-message" class="muted">
+          No sheets yet. Paste a link above.
+        </p>
+      </aside>
+
+      <main class="content">
+        <div id="tab-picker-row" class="tab-row" hidden>
+          <label for="tab-picker">Tab</label>
+          <select id="tab-picker"></select>
+        </div>
+
+        <p id="add-form-note" class="muted" hidden></p>
+
+        <section id="add-section" class="card" hidden>
+          <h2>Add row</h2>
+          <form id="add-form">
+            <div id="add-fields" class="field-row"></div>
+            <button type="submit" class="primary">Add</button>
+          </form>
+        </section>
+
+        <section id="table-section" class="card" hidden>
+          <h2>Sheet rows</h2>
+          <table id="sheet-table">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+          <p id="empty-message" class="muted" hidden>No rows yet.</p>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

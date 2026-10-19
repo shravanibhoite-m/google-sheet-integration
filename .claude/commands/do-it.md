@@ -71,6 +71,32 @@ Score every row. Any `MISSING` in Section A, or any hit in Section B, is a **ref
 | "TODO later", "handle appropriately", "as needed", "etc." | Not a decision — a deferral |
 | Hand-rolling retry, backoff, or the OAuth flow | `tenacity` and `google-auth-oauthlib` are already dependencies |
 
+### C. Frontend plans — read this instead of A1/A2/A4/A7
+
+Sections A and B assume a FastAPI backend. When the plan builds a browser-only
+frontend under `web/`, those rows do not apply. Swap in these:
+
+| # | Requirement |
+|---|---|
+| 1 | Exact file path for every file, inside the `web/` layout (`css/`, `js/`) |
+| 2 | Each module's exported function names and what it returns |
+| 3 | Which Sheets REST call each action uses, and the OAuth scope |
+| 4 | Which module owns the DOM and which owns the `fetch` — they are never the same one |
+| 7 | Config values live in `web/js/config.js`, gitignored, with a committed `config.example.js` |
+
+Section B still applies except for these three rows, which are backend-only:
+
+- *Secrets in `Settings`* — a browser has no `Settings`. An OAuth **client ID** is
+  public by design and belongs in `config.js`. A client **secret** in frontend code
+  is still an instant refusal.
+- *Hand-rolling retry* — `tenacity` is Python. In a no-build frontend a small
+  backoff helper is acceptable when the plan says so.
+- *Bare `uvicorn` / `pytest`* — a static file server started with `uv run` is fine.
+
+A prototype plan may cut retry, concurrency control and silent token refresh **only
+when it names each cut and the condition for adding it back.** An unexplained
+omission is still a refusal.
+
 ### Refusal output — exact shape
 
 ```
