@@ -1,0 +1,18 @@
+[project]
+name = "sheet-integration"
+version = "0.1.0"
+description = "Google Sheets integration service with a simple HTML/JS frontend"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.146.0",
+    "google-api-python-client>=2.201.0",
+    "google-auth-oauthlib>=1.5.0",
+    "pydantic-settings>=2.16.0",
+    "tenacity>=9.2.1",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[tool.uv]
+# OneDrive-synced folder: hardlinks are not supported, so copy packages instead.
+link-mode = "copy"
